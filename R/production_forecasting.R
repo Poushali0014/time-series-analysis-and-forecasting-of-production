@@ -1,4 +1,7 @@
 rm(list=ls())
+install.packages("astsa")
+install.packages("tseries")
+install.packages("forecast")
 library(astsa)
 library(tseries)
 library(forecast)
@@ -150,6 +153,9 @@ m19=arima(data,order=c(1,1,0),seasonal=list(order=c(1,1,1),period=12),method="ML
 m19$aic
 Box.test(m11$residuals,lag=25,type="Ljung-Box",fitdf=4)
 adf.test(m11$residuals)
+residual=m11$resid
+plot(residual,main="Plot of residual series of ARIMA(2,1,2,2,1,1,12)",ylab="Residuals")
+
 ##forecast
 f=forecast(m11,h=length(test))
 plot(f)
